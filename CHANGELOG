@@ -4,5 +4,6 @@ CHANGELOG message_highlight
 RELEASE 2.0
 -----------
 
+- bugfix: change insertrow code to work with larry skin
 - move to github
 
