@@ -1,0 +1,59 @@
+.rcmfd_mh_header {
+  font-size: 10pt;
+  margin-right: 10px;
+}
+
+.rcmfd_mh_input {
+  font-size: 10pt;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.mh_color {
+  margin-right: 10px;
+}
+
+.mh_color_input_2 {
+  background-color:#FF764D;
+  border:1px solid black;
+  cursor:pointer;
+  display:inline-block;
+  float:none;
+  height: 20px;
+  width:100px;
+  margin-left: 10px;
+  vertical-align: top;
+}
+
+.mh_color_input {
+  width: 100px;
+  height: 20px;
+  display: none;
+}
+
+.mh_button {
+  margin-left: 10px;
+}
+
+.mh_first {
+	display: none;
+}
+
+/* remove some colorpicker elements */
+#mColorPickerTransparent, #mColorPickerSwatches, #mColorPickerImgGray {
+  display: none;
+}
+
+#mColorPickerFooter {
+  background-color: #ffffff !important;
+}
+
+#mColorPickerImg {
+  height: 55px !important;
+}
+
+#mColorPicker {
+  height: 83px !important;
+  padding: 2px !important;
+  background-color: #ffffff !important;
+}

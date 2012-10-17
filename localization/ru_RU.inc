@@ -1,0 +1,14 @@
+<?php
+$labels['mh_title'] = 'Подсветка сообщений';
+$labels['mh_matches'] = 'совпадения';
+$labels['mh_color'] = 'цвет';
+$labels['mh_delete'] = 'удалить';
+$labels['deleteconfirm'] = 'Вы действительно хотите удалить это правило?';
+
+// these should never happen, but add anyways
+$labels['headererror'] = 'Ошибка в правиле';
+$labels['inputempty'] = 'Одно или более совпадений пусты';
+$labels['invalidcolor'] = 'Неверный цвет';
+
+?>
+
