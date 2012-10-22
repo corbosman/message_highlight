@@ -1,3 +1,7 @@
+.rcmfd_mh_row td {
+  background-color: transparent !important;
+}
+
 .rcmfd_mh_header {
   font-size: 10pt;
   margin-right: 10px;

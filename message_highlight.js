@@ -10,7 +10,8 @@ $(document).ready(function() {
   
       // check if our color info is present
       if(message.flags && message.flags.plugin_mh_color) {
-        $(evt.row.obj).children().css('background-color', message.flags.plugin_mh_color);
+        $(evt.row.obj).addClass('rcmfd_mh_row');
+        evt.row.obj.style.backgroundColor = message.flags.plugin_mh_color;
       }
     });  
 
