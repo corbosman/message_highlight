@@ -1,0 +1,5 @@
+{
+  "name":"cor/message_highlight",
+  "description":"colorize the message index rows based on specific criteria",
+  "license":"GPL-2.0"
+}
