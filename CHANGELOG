@@ -1,8 +1,13 @@
 CHANGELOG message_highlight
 ===========================
 
+RELEASE 2.1
+
+- bugfix: minor fix for table layout
+- icon for larry theme
+- fixes for larry theme
+
 RELEASE 2.0.1
--------------
 
 - minor version bump for composer test
 

@@ -2,7 +2,7 @@
 
 /**
 * @version 1.2
-* @author Cor Bosman (roundcube@wa.ter.net)
+* @author Cor Bosman (cor@roundcu.be)
 */
 
 class message_highlight extends rcube_plugin
@@ -18,7 +18,7 @@ class message_highlight extends rcube_plugin
     $this->add_hook('preferences_list', array($this, 'mh_preferences'));
     $this->add_hook('preferences_save', array($this, 'mh_save'));
     $this->add_hook('preferences_sections_list',array($this, 'mh_preferences_section'));
-    $this->add_hook('storage_init', array($this, 'imap_init'));
+    $this->add_hook('storage_init', array($this, 'storage_init'));
 
     $this->register_action('plugin.mh_add_row', array($this, 'mh_add_row'));
 
@@ -27,7 +27,7 @@ class message_highlight extends rcube_plugin
     $this->include_stylesheet('message_highlight.css');
   }
 
-  function imap_init($p)
+  function storage_init($p)
   {
     $p['fetch_headers'] .= trim($p['fetch_headers']. ' ' . 'CC');
     return($p);
@@ -78,7 +78,6 @@ class message_highlight extends rcube_plugin
 
       foreach($prefs as $p) {
         $args['blocks']['mh_preferences']['options'][$i++] = array(
-          'title'   => '',
           'content' => $this->mh_get_form_row($p['header'], $p['input'], $p['color'], true)
           );
       }
@@ -126,8 +125,7 @@ class message_highlight extends rcube_plugin
       html::span('mh_matches', Q($this->gettext('mh_matches'))) .   
       $input->show() . 
       html::span('mh_color', Q($this->gettext('mh_color'))) . 
-      $color . 
-      $button . $add_button;
+      $color . $button . $add_button;
 
     if(rcmail::get_instance()->config->get('request_saver_compress_html', false)){
       $content = request_saver::html_compress($content);

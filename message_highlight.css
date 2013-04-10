@@ -9,8 +9,8 @@
 
 .rcmfd_mh_input {
   font-size: 10pt;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: 10px !important;
+  margin-right: 10px !important;
 }
 
 .mh_color {
@@ -33,6 +33,8 @@
   width: 100px;
   height: 20px;
   display: none;
+  padding-top: 4px;
+  margin-right: 10px;
 }
 
 .mh_button {
@@ -41,6 +43,15 @@
 
 .mh_first {
 	display: none;
+}
+
+/* icon */
+#sections-table #rcmrowmh_preferences td.section {
+	background-position: 6px -238px;
+}
+
+#sections-table #rcmrowmh_preferences.selected td.section {
+	background-position: 6px -262px;
 }
 
 /* remove some colorpicker elements */
