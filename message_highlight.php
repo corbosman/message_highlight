@@ -1,7 +1,7 @@
 <?php
 
 /**
-* @version 1.2
+* @version 2.1
 * @author Cor Bosman (cor@roundcu.be)
 */
 
