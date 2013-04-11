@@ -1,6 +1,10 @@
 CHANGELOG message_highlight
 ===========================
 
+RELEASE 2.2
+
+- bugfix: removed a td in javascript
+
 RELEASE 2.1
 
 - bugfix: minor fix for table layout

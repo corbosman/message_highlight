@@ -43,7 +43,7 @@ function mh_add(button) {
 // ajax return call
 function mh_receive_row(data) {
   var row = data.row;
-  $(mh_cur_row).after('<tr><td class="title"></td><td>'+row+'</td></tr>');
+  $(mh_cur_row).after('<tr><td>'+row+'</td></tr>');
   //$('.mh_color_input:last').mColorPicker();
   
   $('input[data-mcolorpicker!="true"]').filter(function() {
