@@ -1,6 +1,10 @@
 CHANGELOG message_highlight
 ===========================
 
+RELEASE 2.3
+
+- bugfix: initial row was malformed.
+
 RELEASE 2.2
 
 - bugfix: removed a td in javascript

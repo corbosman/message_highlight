@@ -85,7 +85,6 @@ class message_highlight extends rcube_plugin
       // no rows yet, add 1 empty row
       if($i == 1) {
         $args['blocks']['mh_preferences']['options'][$i] = array(
-          'title'   => '',
           'content' => 	$this->mh_get_form_row()
           );
       }
