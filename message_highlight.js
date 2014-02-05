@@ -16,11 +16,11 @@ $(document).ready(function() {
     });  
 
   
-    $('.mh_delete').live('click', function() {
+    $('#preferences-details').on('click', '.mh_delete', function() {
       mh_delete(this);
     });
 
-    $('.mh_add').live('click', function() {
+    $('#preferences-details').on('click', '.mh_add', function() {
       mh_add(this);
     });
   }

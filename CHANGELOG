@@ -1,6 +1,10 @@
 CHANGELOG message_highlight
 ===========================
 
+RELEASE 2.4
+
+- live() jquery call replaced with on()
+
 RELEASE 2.3
 
 - bugfix: initial row was malformed.
