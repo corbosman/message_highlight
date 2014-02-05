@@ -6,7 +6,11 @@ $(document).ready(function() {
     rcmail.addEventListener('plugin.mh_receive_row', mh_receive_row);
 	
     rcmail.addEventListener('insertrow', function(evt) {
+      if(!rcmail.env.messages) return; 
+      
       var message = rcmail.env.messages[evt.row.uid];
+
+
   
       // check if our color info is present
       if(message.flags && message.flags.plugin_mh_color) {
