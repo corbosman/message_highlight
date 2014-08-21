@@ -55,7 +55,8 @@ class message_highlight extends rcube_plugin
   // find a match for this message
   function mh_find_match($message) {
     foreach($this->prefs as $p) {
-      if(stristr($message->$p['header'], $p['input'])) {
+      $header = iconv_mime_decode($message->$p['header'], 2, 'UTF-8');
+      if(stristr($header, $p['input'])) {
         return($p['color']);
       }
     }
