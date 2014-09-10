@@ -1,6 +1,10 @@
 CHANGELOG message_highlight
 ===========================
 
+RELEASE 2.5.2
+
+- fix composer.json
+
 RELEASE 2.5
 
 - js bug fix, dont respond to insertrow except for message view
