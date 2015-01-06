@@ -7,7 +7,7 @@
 
 class message_highlight extends rcube_plugin
 {
-  public $task = 'mail|settings';
+  //public $task = 'mail|settings';
   private $rcmail;
   private $prefs;
 
@@ -73,20 +73,22 @@ class message_highlight extends rcube_plugin
         'name'    => Q($this->gettext('mh_title'))
         );
 
-      $i = 1;
-      $prefs = $rcmail->config->get('message_highlight', array());
+      if($args['current'] == 'mh_preferences') {
+        $i = 1;
+        $prefs = $rcmail->config->get('message_highlight', array());
 
-      foreach($prefs as $p) {
-        $args['blocks']['mh_preferences']['options'][$i++] = array(
-          'content' => $this->mh_get_form_row($p['header'], $p['input'], $p['color'], true)
+        foreach ($prefs as $p) {
+          $args['blocks']['mh_preferences']['options'][$i++] = array(
+              'content' => $this->mh_get_form_row($p['header'], $p['input'], $p['color'], true)
           );
-      }
+        }
 
-      // no rows yet, add 1 empty row
-      if($i == 1) {
-        $args['blocks']['mh_preferences']['options'][$i] = array(
-          'content' => 	$this->mh_get_form_row()
+        // no rows yet, add 1 empty row
+        if ($i == 1) {
+          $args['blocks']['mh_preferences']['options'][$i] = array(
+              'content' => $this->mh_get_form_row()
           );
+        }
       }
     }
 
