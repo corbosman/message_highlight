@@ -8,16 +8,11 @@ FEATURES
 
 Go to roundcube settings area and select rules to highlight emails in your mailview.
 
-OLD VERSIONS
-------------
-
-This project has moved from Google Code to git. Older version are available at [Google Code](http://code.google.com/p/roundcube-plugins/downloads/list). This git repository is only for roundcube versions 0.8 and higher.
-
 CONTACT
 -------
 Author:   Cor Bosman (cor@roundcu.be)
 
-Bug reports through github (https://github.com/corbosman/compose_addressbook/issues)
+Bug reports through github (https://github.com/corbosman/message_highlight/issues)
 
 LICENSE
 -------

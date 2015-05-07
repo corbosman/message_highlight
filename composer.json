@@ -1,6 +1,6 @@
 {
   "name":"cor/message_highlight",
-  "description":"colorize the message index rows based on specific criteria",
+  "description":"Assign colors to your emails based on Subject, Sender, Recipient or CC",
   "license":"GPL-2.0",
   "homepage":"https://github.com/corbosman/message_highlight",
   "type": "roundcube-plugin",
