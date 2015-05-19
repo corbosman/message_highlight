@@ -42,7 +42,7 @@ class message_highlight extends rcube_plugin
 
     // dont loop over all messages if we dont have any highlights or no msgs
     if(!count($this->prefs) or !isset($p['messages']) or !is_array($p['messages'])) return $p;
-
+    
     // loop over all messages and add highlight color to each message
     foreach($p['messages'] as $message) {
       if(($color = $this->mh_find_match($message)) !== false ) {
@@ -55,7 +55,7 @@ class message_highlight extends rcube_plugin
   // find a match for this message
   function mh_find_match($message) {
     foreach($this->prefs as $p) {
-      if(stristr($message->$p['header'], $p['input'])) {
+      if(stristr(rcube_mime::decode_header($message->$p['header']), $p['input'])) {
         return($p['color']);
       }
     }
