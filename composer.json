@@ -1,0 +1,19 @@
+{
+  "name":"cor/message_highlight",
+  "description":"Assign colors to your emails based on Subject, Sender, Recipient or CC",
+  "license":"GPL-2.0",
+  "homepage":"https://github.com/corbosman/message_highlight",
+  "type": "roundcube-plugin",
+  "authors": [
+          {
+              "name": "Cor Bosman",
+              "email": "cor@roundcu.be",
+              "homepage": "http://underwa.ter.net",
+              "role": "Developer"
+          }
+      ],
+  "support": {
+          "email": "cor@roundcu.be",
+          "issues": "https://github.com/corbosman/message_highlight/issues"
+      }
+}

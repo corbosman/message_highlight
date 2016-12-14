@@ -1,0 +1,43 @@
+CHANGELOG message_highlight
+===========================
+
+RELEASE 2.6
+
+- some text changes
+
+RELEASE 2.5.2
+
+- fix composer.json
+
+RELEASE 2.5
+
+- js bug fix, dont respond to insertrow except for message view
+
+RELEASE 2.4
+
+- live() jquery call replaced with on()
+
+RELEASE 2.3
+
+- bugfix: initial row was malformed.
+
+RELEASE 2.2
+
+- bugfix: removed a td in javascript
+
+RELEASE 2.1
+
+- bugfix: minor fix for table layout
+- icon for larry theme
+- fixes for larry theme
+
+RELEASE 2.0.1
+
+- minor version bump for composer test
+
+RELEASE 2.0
+-----------
+
+- bugfix: change insertrow code to work with larry skin
+- move to github
+
