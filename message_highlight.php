@@ -70,7 +70,7 @@ class message_highlight extends rcube_plugin
 
       $args['blocks']['mh_preferences'] =  array(
         'options' => array(),
-        'name'    => Q($this->gettext('mh_title'))
+        'name'    => rcube::Q($this->gettext('mh_title'))
         );
 
       $i = 1;
@@ -103,10 +103,10 @@ class message_highlight extends rcube_plugin
 
     // header select box
     $header_select = new html_select(array('name' => '_mh_header[]', 'class' => 'rcmfd_mh_header'));
-    $header_select->add(Q($this->gettext('subject')), 'subject');
-    $header_select->add(Q($this->gettext('from')), 'from');
-    $header_select->add(Q($this->gettext('to')), 'to');
-    $header_select->add(Q($this->gettext('cc')), 'cc');
+    $header_select->add(rcube::Q($this->gettext('subject')), 'subject');
+    $header_select->add(rcube::Q($this->gettext('from')), 'from');
+    $header_select->add(rcube::Q($this->gettext('to')), 'to');
+    $header_select->add(rcube::Q($this->gettext('cc')), 'cc');
 
     // input field
     $input = new html_inputfield(array('name' => '_mh_input[]', 'class' => 'rcmfd_mh_input', 'type' => 'text', 'autocomplete' => 'off', 'value' => $input));
@@ -121,9 +121,9 @@ class message_highlight extends rcube_plugin
     $add_button = html::tag('input', array('class' => 'button mh_add mh_button', 'type' => 'button', 'value' => $this->gettext('mh_add'), 'title' => $this->gettext('mh_add_description')));
 
     $content =  $header_select->show($header) .
-      html::span('mh_matches', Q($this->gettext('mh_matches'))) .
+      html::span('mh_matches', rcube::Q($this->gettext('mh_matches'))) .
       $input->show() .
-      html::span('mh_color', Q($this->gettext('mh_color'))) .
+      html::span('mh_color', rcube::Q($this->gettext('mh_color'))) .
       $color . $button . $add_button;
 
     if(rcmail::get_instance()->config->get('request_saver_compress_html', false)){
@@ -138,7 +138,7 @@ class message_highlight extends rcube_plugin
     $this->add_texts('localization/', false);
     $args['list']['mh_preferences'] = array(
       'id'      => 'mh_preferences',
-      'section' => Q($this->gettext('mh_title'))
+      'section' => rcube::Q($this->gettext('mh_title'))
       );
     return($args);
   }
@@ -149,9 +149,9 @@ class message_highlight extends rcube_plugin
 
     $rcmail = rcmail::get_instance();
 
-    $header  = get_input_value('_mh_header', RCUBE_INPUT_POST);
-    $input   = get_input_value('_mh_input', RCUBE_INPUT_POST);
-    $color   = get_input_value('_mh_color', RCUBE_INPUT_POST);
+    $header  = rcube_utils::get_input_value('_mh_header', rcube_utils::INPUT_POST);
+    $input   = rcube_utils::get_input_value('_mh_input', rcube_utils::INPUT_POST);
+    $color   = rcube_utils::get_input_value('_mh_color', rcube_utils::INPUT_POST);
 
 
     for($i=0; $i < count($header); $i++) {
