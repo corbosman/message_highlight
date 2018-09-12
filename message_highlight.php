@@ -8,25 +8,43 @@
 class message_highlight extends rcube_plugin
 {
   public $task = 'mail|settings';
-  private $rcmail;
+  private $rc;
   private $prefs;
 
   public function init()
   {
-    $this->add_texts('localization/', array('deleteconfirm'));
-    $this->add_hook('messages_list', array($this, 'mh_highlight'));
-    $this->add_hook('preferences_list', array($this, 'mh_preferences'));
-    $this->add_hook('preferences_save', array($this, 'mh_save'));
-    $this->add_hook('preferences_sections_list',array($this, 'mh_preferences_section'));
-    $this->add_hook('storage_init', array($this, 'storage_init'));
+    $this->rc = rcube::get_instance();
 
-    $this->register_action('plugin.mh_add_row', array($this, 'mh_add_row'));
+    if ($this->rc->task === 'settings') {
+
+      $this->add_texts('localization/', array('deleteconfirm'));
+
+      $this->add_hook('preferences_list', array($this, 'mh_preferences'));
+      $this->add_hook('preferences_save', array($this, 'mh_save'));
+      $this->add_hook('preferences_sections_list',array($this, 'mh_preferences_section'));
+
+      $this->include_script('colorpicker/mColorPicker.js');
+
+      $this->register_action('plugin.mh_add_row', array($this, 'mh_add_row'));
+    } elseif ($this->rc->task === 'mail') {
+      $this->add_hook('storage_init', array($this, 'storage_init'));
+      $this->add_hook('messages_list', array($this, 'mh_highlight'));
+    }
 
     $this->include_script('message_highlight.js');
-    $this->include_script('colorpicker/mColorPicker.js');
-    $this->include_stylesheet('message_highlight.css');
+
+    $skin_path = $this->local_skin_path();
+    $this->include_stylesheet("$skin_path/message_highlight.css");
+
+
   }
 
+  /**
+   * add the CC header to fetched headers
+   *
+   * @param $p
+   * @return mixed
+   */
   function storage_init($p)
   {
     $p['fetch_headers'] .= trim($p['fetch_headers']. ' ' . 'CC');
@@ -34,7 +52,12 @@ class message_highlight extends rcube_plugin
   }
 
 
-  // add color information for all messages
+  /**
+   * add highlight data to messages
+   *
+   * @param $p
+   * @return mixed
+   */
   function mh_highlight($p)
   {
     $rcmail = rcmail::get_instance();
@@ -52,7 +75,13 @@ class message_highlight extends rcube_plugin
     return($p);
   }
 
-  // find a match for this message
+
+  /**
+   * find a match
+   *
+   * @param $message
+   * @return bool
+   */
   function mh_find_match($message) {
     foreach($this->prefs as $p) {
       if(stristr(rcube_mime::decode_header($message->{$p['header']}), $p['input'])) {
@@ -66,7 +95,6 @@ class message_highlight extends rcube_plugin
   function mh_preferences($args) {
     if($args['section'] == 'mh_preferences') {
       $this->add_texts('localization/', false);
-      $rcmail = rcmail::get_instance();
 
       $args['blocks']['mh_preferences'] =  array(
         'options' => array(),
@@ -74,12 +102,12 @@ class message_highlight extends rcube_plugin
         );
 
       $i = 1;
-      $prefs = $rcmail->config->get('message_highlight', array());
+      $prefs = $this->rc->config->get('message_highlight', array());
 
       foreach($prefs as $p) {
         $args['blocks']['mh_preferences']['options'][$i++] = array(
           'content' => $this->mh_get_form_row($p['header'], $p['input'], $p['color'], true)
-          );
+        );
       }
 
       // no rows yet, add 1 empty row
@@ -94,41 +122,48 @@ class message_highlight extends rcube_plugin
   }
 
   function mh_add_row() {
-    $rcmail = rcmail::get_instance();
-    $rcmail->output->command('plugin.mh_receive_row', array('row' => $this->mh_get_form_row()));
+    $this->rc->output->command('plugin.mh_receive_row', array('row' => $this->mh_get_form_row()));
   }
 
   // create a form row
   function mh_get_form_row($header = 'from', $input = '', $color = '#ffffff', $delete = false) {
 
     // header select box
-    $header_select = new html_select(array('name' => '_mh_header[]', 'class' => 'rcmfd_mh_header'));
+    $header_select = new html_select(array('name' => '_mh_header[]', 'class' => 'rcmfd_mh_header form-control custom-select pretty-select'));
     $header_select->add(rcube::Q($this->gettext('subject')), 'subject');
     $header_select->add(rcube::Q($this->gettext('from')), 'from');
     $header_select->add(rcube::Q($this->gettext('to')), 'to');
     $header_select->add(rcube::Q($this->gettext('cc')), 'cc');
 
     // input field
-    $input = new html_inputfield(array('name' => '_mh_input[]', 'class' => 'rcmfd_mh_input', 'type' => 'text', 'autocomplete' => 'off', 'value' => $input));
+    $input = new html_inputfield(array('name' => '_mh_input[]', 'class' => 'rcmfd_mh_input form-control', 'type' => 'text', 'autocomplete' => 'off', 'value' => $input));
 
     // color box
     $color = html::tag('input', array('id' => uniqid() ,'name' => '_mh_color[]' ,'type' => 'color' ,'text' => 'hidden', 'class' => 'mh_color_input', 'value' => $color, 'data-hex' => 'true'));
 
     // delete button
-    $button = html::tag('input', array('class' => 'button mh_delete mh_button', 'type' => 'button', 'value' => $this->gettext('mh_delete'), 'title' => $this->gettext('mh_delete_description')));
-
+    // $button = html::a(array('href' => '#', 'class' => '  ', 'title' => $this->gettext('mh_delete')) , 'del');
+    $button = html::tag('a', array('href' => '#', 'class' => 'button icon mh_delete ', 'title' => $this->gettext('mh_delete')), '');
+    $add_button = html::a(array('href' => '#', 'class' => 'button icon mh_add', 'title' => $this->gettext('mh_add')), '');
     // add button
-    $add_button = html::tag('input', array('class' => 'button mh_add mh_button', 'type' => 'button', 'value' => $this->gettext('mh_add'), 'title' => $this->gettext('mh_add_description')));
+    $add_button2 = html::tag('input', array('class' => 'button mh_add mh_button', 'type' => 'button', 'value' => $this->gettext('mh_add'), 'title' => $this->gettext('mh_add_description')));
 
-    $content =  $header_select->show($header) .
+    $content = html::div('mh_preferences_row',
+      html::div('', $header_select->show($header)) .
+      html::div('ml-3 text-center', html::span('mh_matches', rcube::Q($this->gettext('mh_matches')))) .
+      html::div('ml-3', $input->show()) .
+      html::div('ml-5 text-center', html::span('mh_color', rcube::Q($this->gettext('mh_color')))) .
+      html::div('ml-3', $color) .
+      html::div('ml-3', $button) .
+      html::div('ml-3', $add_button)
+    );
+
+
+    $content2 =  $header_select->show($header) .
       html::span('mh_matches', rcube::Q($this->gettext('mh_matches'))) .
       $input->show() .
       html::span('mh_color', rcube::Q($this->gettext('mh_color'))) .
       $color . $button . $add_button;
-
-    if(rcmail::get_instance()->config->get('request_saver_compress_html', false)){
-      $content = request_saver::html_compress($content);
-    }
 
     return($content);
   }
