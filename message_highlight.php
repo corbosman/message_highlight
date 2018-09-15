@@ -10,6 +10,7 @@ class message_highlight extends rcube_plugin
   public $task = 'mail|settings';
   private $rc;
   private $prefs;
+  private $config;
 
   public function init()
   {
@@ -32,6 +33,7 @@ class message_highlight extends rcube_plugin
     }
 
     $this->include_script('message_highlight.js');
+    $this->load_config();
 
     $skin_path = $this->local_skin_path();
     $this->include_stylesheet("$skin_path/message_highlight.css");
@@ -60,8 +62,7 @@ class message_highlight extends rcube_plugin
    */
   function mh_highlight($p)
   {
-    $rcmail = rcmail::get_instance();
-    $this->prefs = $rcmail->config->get('message_highlight', array());
+    $this->prefs = array_merge($this->rc->config->get('message_highlight', array()), $this->rc->config->get('message_highlight_default', array()));
 
     // dont loop over all messages if we dont have any highlights or no msgs
     if(!count($this->prefs) or !isset($p['messages']) or !is_array($p['messages'])) return $p;
@@ -202,4 +203,3 @@ class message_highlight extends rcube_plugin
     return($args);
   }
 }
-?>
