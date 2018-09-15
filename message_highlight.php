@@ -139,14 +139,15 @@ class message_highlight extends rcube_plugin
     $input = new html_inputfield(array('name' => '_mh_input[]', 'class' => 'rcmfd_mh_input form-control', 'type' => 'text', 'autocomplete' => 'off', 'value' => $input));
 
     // color box
-    $color = html::tag('input', array('id' => uniqid() ,'name' => '_mh_color[]' ,'type' => 'color' ,'text' => 'hidden', 'class' => 'mh_color_input', 'value' => $color, 'data-hex' => 'true'));
+    $color = html::tag('input', array('id' => uniqid() ,'name' => '_mh_color[]', 'class' => 'mh_color_input', 'value' => $color, 'data-text' => 'hidden', 'data-hex' => 'true'));
 
     // delete button
     // $button = html::a(array('href' => '#', 'class' => '  ', 'title' => $this->gettext('mh_delete')) , 'del');
     $button = html::tag('a', array('href' => '#', 'class' => 'button icon mh_delete ', 'title' => $this->gettext('mh_delete')), '');
-    $add_button = html::a(array('href' => '#', 'class' => 'button icon mh_add', 'title' => $this->gettext('mh_add')), '');
+    // $add_button = html::a(array('href' => '#', 'class' => 'button icon mh_add', 'title' => $this->gettext('mh_add')), '');
     // add button
-    $add_button2 = html::tag('input', array('class' => 'button mh_add mh_button', 'type' => 'button', 'value' => $this->gettext('mh_add'), 'title' => $this->gettext('mh_add_description')));
+    $button = html::tag('input', array('class' => 'button mh_delete mh_button form-control btn btn-defaut', 'type' => 'button', 'value' => $this->gettext('mh_delete'), 'title' => $this->gettext('mh_delete_description')));
+    $add_button = html::tag('input', array('class' => 'button mh_add mh_button form-control btn btn-default', 'type' => 'button', 'value' => $this->gettext('mh_add'), 'title' => $this->gettext('mh_add_description')));
 
     $content = html::div('mh_preferences_row',
       html::div('', $header_select->show($header)) .
@@ -157,13 +158,6 @@ class message_highlight extends rcube_plugin
       html::div('ml-3', $button) .
       html::div('ml-3', $add_button)
     );
-
-
-    $content2 =  $header_select->show($header) .
-      html::span('mh_matches', rcube::Q($this->gettext('mh_matches'))) .
-      $input->show() .
-      html::span('mh_color', rcube::Q($this->gettext('mh_color'))) .
-      $color . $button . $add_button;
 
     return($content);
   }

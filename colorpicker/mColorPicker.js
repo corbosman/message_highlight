@@ -121,8 +121,8 @@
     if ($t.attr('text') == 'hidden' || $t.attr('data-text') == 'hidden') hidden = true;
 
     var color = $t.val(),
-        width = ($t.width() > 0)? $t.width(): parseInt($t.css('width'), 10),
-        height = ($t.height())? $t.height(): parseInt($t.css('height'), 10),
+        width = 75,
+        height = 25,
         flt = $t.css('float'),
         image = (color == 'transparent')? "url('" + $o.imageFolder + "/grid.gif')": '',
         colorPicker = '';
@@ -193,7 +193,7 @@
       'border':'1px solid #ccc',
       'color':'#fff',
       'z-index':999998,
-      'width':'194px',
+      'width':'199px',
       'height':'184px',
       'font-size':'12px',
       'font-family':'times'
@@ -545,20 +545,30 @@
 
   $(document).ready(function () {
 
-    if ($.fn.mColorPicker.init.replace) {
-
-      $('input[data-mcolorpicker!="true"]').filter(function() {
-    
-        return ($.fn.mColorPicker.init.replace == '[type=color]')? this.getAttribute("type") == 'color': $(this).is($.fn.mColorPicker.init.replace);
-      }).mColorPicker({
+    $('.mh_color_input').mColorPicker({
         imageFolder: 'plugins/message_highlight/colorpicker/images/',
         allowTransparency: false,
         showLogo: false,
         liveEvents: false,
         checkRedraw: 'ajaxSuccess'
-      });
+    });
 
-      $.fn.mColorPicker.liveEvents();
-    }
+
+
+    // if ($.fn.mColorPicker.init.replace) {
+    //
+    //   $('input[data-mcolorpicker!="true"]').filter(function() {
+    //
+    //     return ($.fn.mColorPicker.init.replace == '[type=color]') ? this.getAttribute("type") == 'color': $(this).is($.fn.mColorPicker.init.replace);
+    //   }).mColorPicker({
+    //     imageFolder: 'plugins/message_highlight/colorpicker/images/',
+    //     allowTransparency: false,
+    //     showLogo: false,
+    //     liveEvents: false,
+    //     checkRedraw: 'ajaxSuccess'
+    //   });
+    //
+    //   $.fn.mColorPicker.liveEvents();
+    // }
   });
 })(jQuery);
