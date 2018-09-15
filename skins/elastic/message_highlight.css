@@ -1,6 +1,11 @@
 /* mail list */
 .rcmfd_mh_row td {
     background-color: transparent !important;
+    color: #fff !important;
+}
+
+.rcmfd_mh_row_dark td * {
+    color: #fff !important;
 }
 
 /* preferences */
@@ -28,9 +33,6 @@
     background-color: #ffffff !important;
 }
 
-#mColorPickerImg {
-    height: 55px !important;
-}
 
 #mColorPicker {
     height: 83px !important;

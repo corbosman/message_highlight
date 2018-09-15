@@ -31,8 +31,15 @@ function mh_insert_row(evt) {
 
     // check if our color info is present
     if(message.flags && message.flags.plugin_mh_color) {
-        $(evt.row.obj).addClass('rcmfd_mh_row');
+        var row = $(evt.row.obj);
+        row.addClass('rcmfd_mh_row');
+
         evt.row.obj.style.backgroundColor = message.flags.plugin_mh_color;
+
+        if (brightness(message.flags.plugin_mh_color) < 123) {
+            row.addClass('rcmfd_mh_row_dark');
+        }
+
     }
 }
 
@@ -68,3 +75,13 @@ function mh_receive_row(data) {
   });
 
 }
+
+/* calculate the brightness of a color */
+function brightness(hex) {
+    var rgb = hex.match(/^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i)
+            .slice(1,4)
+            .map(function(x) { return parseInt(x, 16); });
+
+    return (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / 1000
+}
+

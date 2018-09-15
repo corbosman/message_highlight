@@ -3,6 +3,10 @@
     background-color: transparent !important;
 }
 
+.rcmfd_mh_row_dark td * {
+    color: #fff !important;
+}
+
 
 /* settings */
 .mh_preferences_row {
@@ -37,9 +41,6 @@
     background-color: #ffffff !important;
 }
 
-#mColorPickerImg {
-    height: 55px !important;
-}
 
 #mColorPicker {
     height: 83px !important;
