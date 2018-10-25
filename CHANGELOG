@@ -1,6 +1,10 @@
 CHANGELOG message_highlight
 ===========================
 
+RELEASE 4.4
+
+- allow shorthand colors and better error handling, thanks to PR from Andreas Pakulat
+
 RELEASE 4.3
 
 - polish and czech translations
