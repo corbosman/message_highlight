@@ -79,6 +79,10 @@ function mh_receive_row(data) {
 
 /* calculate the brightness of a color */
 function brightness(hex) {
+    var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+    hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+        return r + r + g + g + b + b;
+    });
     var rgb = hex.match(/^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i)
     if (rgb === null) {
         return null;
