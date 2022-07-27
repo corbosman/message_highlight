@@ -49,7 +49,7 @@ class message_highlight extends rcube_plugin
    */
   function storage_init($p)
   {
-    $p['fetch_headers'] .= trim($p['fetch_headers']. ' ' . 'CC');
+    $p['fetch_headers'] = trim(($p['fetch_headers'] ?? '') . ' ' . 'CC');
     return($p);
   }
 
